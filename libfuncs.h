@@ -37,6 +37,7 @@
 #include "list.h"
 #include "log.h"
 #include "queue.h"
+#include "cbuf.h"
 #include "server.h"
 #include "misc.h"
 
