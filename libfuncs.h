@@ -38,5 +38,6 @@
 #include "log.h"
 #include "queue.h"
 #include "server.h"
+#include "misc.h"
 
 #endif

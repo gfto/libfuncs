@@ -5,7 +5,7 @@ CFLAGS = -ggdb -Wall -Wextra -Wshadow -Wformat-security -O2
 RM = /bin/rm -f
 Q=@
 
-OBJS = queue.o list.o io.o log.o http_response.o asyncdns.o server.o
+OBJS = queue.o list.o io.o log.o http_response.o asyncdns.o server.o misc.o
 PROG = libfuncs.a
 
 all: $(PROG)
