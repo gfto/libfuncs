@@ -38,8 +38,21 @@ Documentation
 There isn't any. I'm too lazy to write proper docs. Maybe some day but
 until then just look at the header files.
 
+Development
+===========
+The development is tracked using git. The repository is hosted at github
+to get it, run the following command:
+
+   git clone git://github.com/gfto/libfuncs.git
+
+Releases
+========
+Official releases can be downloaded from libfuncs home page which is
+
+   http://georgi.unixsol.org/programs/libfuncs/
+
 Contact
 =======
-Georgi Chorbadzhiyski <georgi@unixsol.org>
-http://georgi.unixsol.org/
-http://unixsol.org/
+For patches, bug reports, complaints and so on send e-mail to
+
+   Georgi Chorbadzhiyski <georgi@unixsol.org>
