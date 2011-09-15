@@ -1,10 +1,9 @@
 /*
- * IPTV.bg Media Proxy
- * Request queue header file
- * 
+ * Queue header file
  * Copyright (C) 2006 Unix Solutions Ltd.
- * Written by Luben Karavelov (luben@unixsol.org)
- * 
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
 #ifndef QUEUE_H
 # define QUEUE_H

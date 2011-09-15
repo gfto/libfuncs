@@ -1,6 +1,9 @@
 /*
  * UX IO functions header file
  * Copyright (C) 2006-2009 Unix Solutions Ltd.
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
 
 #ifndef IO_H

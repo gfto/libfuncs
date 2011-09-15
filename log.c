@@ -1,12 +1,10 @@
 /*
- * IPTV.bg Media Proxy
  * LOG functions
- * 
  * Copyright (C) 2006-2008 Unix Solutions Ltd.
- * Written by Luben Karavelov (luben@unixsol.org)
- * 
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
-
 /* Needed for POLLRDHUP */
 #define _GNU_SOURCE 1
 

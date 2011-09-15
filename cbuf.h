@@ -1,3 +1,10 @@
+/*
+ * Circular buffer header file
+ * Copyright (C) 2010 Unix Solutions Ltd.
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
+ */
 #ifndef CBUF_H
 #define CBUF_H
 

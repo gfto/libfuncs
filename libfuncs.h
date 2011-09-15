@@ -1,6 +1,9 @@
 /*
  * UX libfuncs main header
  * Copyright (C) 2006-2010 Unix Solutions Ltd.
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
 
 #ifndef LIBFUNCS_H

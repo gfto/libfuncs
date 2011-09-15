@@ -1,6 +1,9 @@
 /*
  * HTTP responses
  * Copyright (C) 2006-2009 Unix Solutions Ltd.
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
 
 #include <stdio.h>

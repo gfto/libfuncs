@@ -1,10 +1,9 @@
 /*
- * IPTV.bg Media Proxy
- * Request queue handling
- * 
+ * Queue handling
  * Copyright (C) 2006 Unix Solutions Ltd.
- * Written by Luben Karavelov (luben@unixsol.org)
- * 
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
 #include <stdio.h>
 #include <stdlib.h>

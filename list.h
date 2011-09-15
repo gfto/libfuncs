@@ -2,6 +2,8 @@
  * List manipulations header file
  * Copyright (C) 2006-2010 Unix Solutions Ltd.
  *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
 #ifndef LIST_H
 # define LIST_H

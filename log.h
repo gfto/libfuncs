@@ -1,12 +1,10 @@
 /*
- * IPTV.bg Media Proxy
  * LOG functions header file
- * 
  * Copyright (C) 2006 Unix Solutions Ltd.
- * Written by Luben Karavelov (luben@unixsol.org)
- * 
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
-
 #ifndef LOG_H
 # define LOG_H
 

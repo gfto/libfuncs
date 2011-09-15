@@ -1,6 +1,9 @@
 /*
  * Server functions
  * Copyright (C) 2006-2010 Unix Solutions Ltd.
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
 
 #include <stdio.h>

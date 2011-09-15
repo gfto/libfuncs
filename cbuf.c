@@ -1,3 +1,10 @@
+/*
+ * Circular buffer
+ * Copyright (C) 2010 Unix Solutions Ltd.
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

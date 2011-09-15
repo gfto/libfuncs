@@ -1,3 +1,10 @@
+/*
+ * Misc functions
+ * Copyright (C) 2010 Unix Solutions Ltd.
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
+ */
 #include <sys/time.h>
 #include <string.h>
 #include <errno.h>

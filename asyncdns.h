@@ -1,6 +1,9 @@
 /*
  * Async DNS resolver
  * Copyright (C) 2009-2010 Unix Solutions Ltd.
+ *
+ * Released under MIT license.
+ * See LICENSE-MIT.txt for license terms.
  */
 
 #ifndef ASYNCDNS_H
