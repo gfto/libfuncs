@@ -1,0 +1,45 @@
+libfuncs
+========
+You won't find anything earth shattering here. It is just a bunch
+of code that was used all over my projects, so I just extracted it
+into a self contained library suitable for static compilation and
+decided to release it. You'll probably find better list functions,
+queue functions and just about anything than what it is here, so
+be warned. The code works and it is used in production, but it is
+not pretty, documented or portable. Developed and tested in Linux
+environment only with very rare compilation tests under FreeBSD.
+
+Using it
+========
+Clone or download libfuncs in a directory in your source tree and
+look at the example Makefile bellow:
+
+---
+FUNCS_DIR = libfuncs
+FUNCS_LIB = $(FUNCS_DIR)/libfuncs.a
+
+all: prog
+
+prog_OBJS = main.o $(FUNCS_LIB)
+
+$(FUNCS_LIB):
+	$(MAKE) -s -C $(FUNCS_DIR)
+
+prog: $(prog_OBJS)
+	$(CC) $(CFLAGS) $(prog_OBJS) -o prog
+---
+
+In every C file that you need to use it, add
+
+#include "libfuncs/libfuncs.h"
+
+Documentation
+=============
+There isn't any. I'm too lazy to write proper docs. Maybe some day but
+until then just look at the header files.
+
+Contact
+=======
+Georgi Chorbadzhiyski <georgi@unixsol.org>
+http://georgi.unixsol.org/
+http://unixsol.org/
