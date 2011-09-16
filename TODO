@@ -1,0 +1,7 @@
+- Reduce code duplicaton
+- Audit all parsers (there are problems with descriptor loops)
+- Add more descriptors
+- Add descriptors generators/parsers/data types
+- Write documentation
+- Merge the examples
+- Collect weird test files
