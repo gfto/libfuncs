@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <string.h>
 #include <netdb.h>
@@ -30,6 +31,12 @@
 
 #include "libfuncs.h"
 #include "log.h"
+
+static int io_report_errors = 1;
+
+void set_log_io_errors(int report_io_errors) {
+	io_report_errors = report_io_errors;
+}
 
 char * chomp(char *x) {
 	int i=strlen(x)-1;
@@ -88,7 +95,8 @@ ssize_t fdgetline(int fd, char *buf, size_t buf_size) {
 			if (num_timeouts++ <= FDGETLINE_RETRIES) {
 				continue;
 			} else {
-				log_perror("fdgetline() timeout", errno);
+				if (io_report_errors)
+					log_perror("fdgetline() timeout", errno);
 			}
 		}
 		if (fdready == 0 || fdready == -1) { /* Timeout || error */
@@ -129,7 +137,7 @@ ssize_t fdread_ex(int fd, char *buf, size_t buf_size, int timeout, int retries, 
 			if (num_timeouts++ <= retries) {
 				continue;
 			} else {
-				if (timeout) {
+				if (timeout && io_report_errors) {
 					log_perror("fdread() timeout", errno);
 				}
 				return rbytes > 0 ? rbytes : -1;
@@ -183,7 +191,8 @@ ssize_t fdwrite(int fd, char *buf, size_t buf_size) {
 			if (num_timeouts++ <= FDWRITE_RETRIES) {
 				continue;
 			} else {
-				log_perror("fdwrite() timeout", errno);
+				if (io_report_errors)
+					log_perror("fdwrite() timeout", errno);
 				return wbytes > 0 ? wbytes : -1;
 			}
 		}

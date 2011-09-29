@@ -31,6 +31,8 @@ ssize_t fdwrite(int fd, char *buf, size_t buf_size);
 int fdputs(int fd, char *msg);
 int fdputsf(int fd, char *fmt, ...);
 
+void set_log_io_errors(int report_io_errors);
+
 void set_sock_nonblock(int sockfd);
 void set_sock_block(int sockfd);
 
