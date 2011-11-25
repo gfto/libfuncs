@@ -27,7 +27,7 @@ typedef struct QUEUE {
 	int items;				// number of messages in queue
 } QUEUE;
 
-QUEUE *queue_new		();
+QUEUE *queue_new		(void);
 void queue_free			(QUEUE **q);
 
 void queue_add			(QUEUE *q, void *data);

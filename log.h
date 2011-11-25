@@ -15,7 +15,7 @@ extern "C" {
 #include <stdio.h>
 
 void log_init  (char *host_ident, int use_syslog, int use_stderr, char *log_host, int log_port);
-void log_close ();
+void log_close (void);
 
 void LOG (const char *msg);
 

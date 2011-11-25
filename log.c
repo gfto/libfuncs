@@ -167,7 +167,7 @@ void log_set_out_fd(FILE *new_out_fd) {
 	OUT_FD = new_out_fd;
 }
 
-void log_close() {
+void log_close(void) {
 	logger->dying = 1;
 	int count = 0;
 	while (logger->queue->items && count++ < 250)

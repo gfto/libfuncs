@@ -237,7 +237,7 @@ void consume(CBUF *b, int size) {
 	}
 }
 
-void cbuf_test() {
+void cbuf_test(void) {
 	CBUF *in;
 
 	CBUF *out;

@@ -15,7 +15,7 @@
 #include "libfuncs.h"
 #include "queue.h"
 
-QUEUE *queue_new() {
+QUEUE *queue_new(void) {
 	pthread_mutex_t *mutex = malloc(sizeof(pthread_mutex_t));
 	if (pthread_mutex_init(mutex,NULL) != 0) {
 		perror("queue_new: mutex_init");

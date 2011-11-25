@@ -6,9 +6,6 @@
  * See LICENSE-MIT.txt for license terms.
  */
 
-/* Needed for POLLRDHUP */
-#define _GNU_SOURCE 1;
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>

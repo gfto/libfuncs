@@ -48,7 +48,7 @@ LIST *list_new(char *name) {
 	return list;
 }
 
-void list_free(LIST **plist, void (*free_func)(), void (*freep_func)()) {
+void list_free(LIST **plist, void (*free_func)(void *), void (*freep_func)(void **)) {
 	LIST *list = *plist;
 	if (!list)
 		return;

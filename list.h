@@ -43,7 +43,7 @@ typedef struct LIST {
 	for (elem = (list)->head->prev; elem != (list)->head && elem->data; elem = elem->prev)
 
 LIST *list_new			(char *listname);
-void list_free			(LIST **l, void (*l_free)(), void (*l_freep)());
+void list_free			(LIST **l, void (*l_free)(void *), void (*l_freep)(void **));
 
 void list_lock			(LIST *l);
 void list_unlock		(LIST *l);
