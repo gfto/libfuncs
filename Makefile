@@ -1,5 +1,7 @@
 CC = $(CROSS)$(TARGET)gcc
 LINK = $(CROSS)$(TARGET)ld -o
+MKDEP = $(CROSS)$(TARGET)$(CC) -M -o $*.d $<
+
 LIBRARY_LINK_OPTS =  -L. -r
 CFLAGS = -O2 -ggdb -std=c99 -D_GNU_SOURCE
 CFLAGS += -Wall -Wextra -Wshadow -Wformat-security -Wstrict-prototypes
@@ -18,11 +20,14 @@ $(PROG): $(OBJS)
 	$(Q)$(LINK) $@ $(LIBRARY_LINK_OPTS) $(OBJS)
 
 %.o: %.c libfuncs.h
+	@$(MKDEP)
 	$(Q)echo "  CC	libfuncs	$<"
 	$(Q)$(CC) $(CFLAGS) -c $<
 
+-include $(OBJS:.o=.d)
+
 clean:
-	$(Q)echo "  RM	$(PROG) $(OBJS)"
-	$(Q)$(RM) $(PROG) *.o core *.core *~
+	$(Q)echo "  RM	$(PROG) $(OBJS:.o=.{o,d})"
+	$(Q)$(RM) $(PROG) $(OBJS:.o=.{o,d}) *~
 
 distclean: clean
