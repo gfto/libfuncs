@@ -11,6 +11,7 @@
 #include <netdb.h>
 #include <pthread.h>
 #include <assert.h>
+#include <inttypes.h>
 
 #include "libfuncs.h"
 #include "cbuf.h"
@@ -31,7 +32,7 @@ int cbuf_free_data_size(CBUF *b) {
 }
 
 void cbuf_dump(CBUF *b) {
-	LOGf("CBUF  [%10s]: size:%d pos:%d writepos:%d input:%llu output:%llu free_data:%d buffered:%lld\n",
+	LOGf("CBUF  [%10s]: size:%d pos:%d writepos:%d input:%"PRIu64" output:%"PRIu64" free_data:%d buffered:%"PRId64"\n",
 		b->name,
 		b->size,
 		b->pos,
