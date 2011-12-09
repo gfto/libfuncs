@@ -1,6 +1,6 @@
 CC = $(CROSS)$(TARGET)gcc
 LINK = $(CROSS)$(TARGET)ld -o
-MKDEP = $(CROSS)$(TARGET)$(CC) -M -o $*.d $<
+MKDEP = $(CC) -M -o $*.d $<
 
 LIBRARY_LINK_OPTS =  -L. -r
 CFLAGS = -O2 -ggdb -std=c99 -D_GNU_SOURCE
