@@ -37,11 +37,10 @@ QUEUE *queue_new(void) {
 
 void queue_free(QUEUE **pq) {
 	QUEUE *q = *pq;
-	void *data;
 	if (!q)
 		return;
 	while (q->items > 0) {
-		data = queue_get(q);
+		queue_get(q);
 	}
 	pthread_mutex_destroy(q->mutex);
 	FREE(q->mutex);
