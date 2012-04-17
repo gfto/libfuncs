@@ -27,7 +27,7 @@ $(PROG): $(OBJS)
 -include $(OBJS:.o=.d)
 
 clean:
-	$(Q)echo "  RM	$(PROG) $(OBJS:.o=.{o,d})"
-	$(Q)$(RM) $(PROG) $(OBJS:.o=.{o,d}) *~
+	$(Q)echo "  RM	$(PROG) $(OBJS:.o=.o) $(OBJS:.o=.d)"
+	$(Q)$(RM) $(PROG) $(OBJS:.o=.o) $(OBJS:.o=.d) *~
 
 distclean: clean
