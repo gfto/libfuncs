@@ -1,6 +1,7 @@
-CC = $(CROSS)$(TARGET)gcc
-LINK = $(CROSS)$(TARGET)ld -o
-MKDEP = $(CC) -M -o $*.d $<
+CC = cc
+LINK = ld -o
+CROSS := $(TARGET)
+MKDEP = $(CROSS)$(CC) -M -o $*.d $<
 
 LIBRARY_LINK_OPTS =  -L. -r
 CFLAGS = -O2 -ggdb -std=c99 -D_GNU_SOURCE
@@ -17,12 +18,12 @@ all: $(PROG)
 
 $(PROG): $(OBJS) 
 	$(Q)echo "  LINK	$(PROG)"
-	$(Q)$(LINK) $@ $(LIBRARY_LINK_OPTS) $(OBJS)
+	$(Q)$(CROSS)$(LINK) $@ $(LIBRARY_LINK_OPTS) $(OBJS)
 
 %.o: %.c libfuncs.h
 	@$(MKDEP)
 	$(Q)echo "  CC	libfuncs	$<"
-	$(Q)$(CC) $(CFLAGS) -c $<
+	$(Q)$(CROSS)$(CC) $(CFLAGS) -c $<
 
 -include $(OBJS:.o=.d)
 
