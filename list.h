@@ -21,7 +21,7 @@ typedef struct LNODE {
 } LNODE;
 
 typedef struct LIST {
-	pthread_mutex_t *mutex;		// List's lock
+	pthread_mutex_t mutex;		// List's lock
 	struct LNODE *head;			// Points to first element of the list
 	struct LNODE *tail;			// Points to last element of the list
 	unsigned int items;			// How many items are in the list

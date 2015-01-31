@@ -22,20 +22,21 @@
 #endif
 
 LIST *list_new(char *name) {
-	pthread_mutex_t *mutex = malloc(sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(mutex,NULL) != 0) {
-		perror("list_new: mutex_init");
-		return NULL;
-	}
 	LIST *list = calloc(1, sizeof(LIST));
 	if (!list)
 		return NULL;
-	list->mutex = mutex;
-	list->name = strdup(name);
-
-	LNODE *node = malloc(sizeof(LNODE));
-	if (!node)
+	LNODE *node = calloc(1, sizeof(LNODE));
+	if (!node) {
+		free(list);
 		return NULL;
+	}
+	if (pthread_mutex_init(&list->mutex,NULL) != 0) {
+		perror("list_new: mutex_init");
+		free(list);
+		free(node);
+		return NULL;
+	}
+	list->name = strdup(name);
 
 	node->data = NULL;
 	node->next = node;
@@ -64,18 +65,17 @@ void list_free(LIST **plist, void (*free_func)(void *), void (*freep_func)(void 
 	}
 	FREE(list->head);
 	list_unlock(list);
-	pthread_mutex_destroy(list->mutex);
-	FREE(list->mutex);
+	pthread_mutex_destroy(&list->mutex);
 	FREE(list->name);
 	FREE(*plist);
 }
 
 void list_lock(LIST *list) {
-	pthread_mutex_lock(list->mutex);
+	pthread_mutex_lock(&list->mutex);
 }
 
 void list_unlock(LIST *list) {
-	pthread_mutex_unlock(list->mutex);
+	pthread_mutex_unlock(&list->mutex);
 }
 
 void list_add(LIST *list, void *data) {
@@ -89,7 +89,7 @@ void list_add(LIST *list, void *data) {
 		return;
 	}
 
-	LNODE *node = malloc(sizeof(LNODE));
+	LNODE *node = calloc(1, sizeof(LNODE));
 	if (!node) {
 		Ldbg(stderr, "list_add(%s), can't alloc node\n", list->name);
 		return;
