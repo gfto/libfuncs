@@ -22,8 +22,8 @@ typedef struct QNODE {
 typedef struct QUEUE {
 	QNODE *head;
 	QNODE *tail;
-	pthread_mutex_t *mutex;	// queue's mutex.
-	pthread_cond_t  *cond;	// queue's condition variable.
+	pthread_mutex_t mutex;	// queue's mutex.
+	pthread_cond_t cond;	// queue's condition variable.
 	int items;				// number of messages in queue
 } QUEUE;
 

@@ -16,23 +16,20 @@
 #include "queue.h"
 
 QUEUE *queue_new(void) {
-	pthread_mutex_t *mutex = malloc(sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(mutex,NULL) != 0) {
-		perror("queue_new: mutex_init");
-		return NULL;
-	}
-	pthread_cond_t *cond = malloc(sizeof(pthread_cond_t));
-	if (pthread_cond_init(cond,NULL)!=0){
-		perror("queue_new: cond_init");
-		return NULL;
-	}
-    QUEUE *q = calloc(1, sizeof(QUEUE));
+	QUEUE *q = calloc(1, sizeof(QUEUE));
 	if (!q)
 		return NULL;
-    // initialize queue 
-    q->mutex = mutex;
-    q->cond  = cond;
-    return q;
+	if (pthread_mutex_init(&q->mutex,NULL) != 0) {
+		perror("queue_new: mutex_init");
+		free(q);
+		return NULL;
+	}
+	if (pthread_cond_init(&q->cond,NULL)!=0){
+		perror("queue_new: cond_init");
+		free(q);
+		return NULL;
+	}
+	return q;
 }
 
 void queue_free(QUEUE **pq) {
@@ -42,24 +39,22 @@ void queue_free(QUEUE **pq) {
 	while (q->items > 0) {
 		queue_get(q);
 	}
-	pthread_mutex_destroy(q->mutex);
-	FREE(q->mutex);
-	pthread_cond_destroy(q->cond);
-	FREE(q->cond);
+	pthread_mutex_destroy(&q->mutex);
+	pthread_cond_destroy(&q->cond);
 	FREE(*pq);
 }
 
 void queue_add(QUEUE *q, void *data) {
 	if (!q)
 		return;
-	QNODE *a_msg = malloc(sizeof(QNODE));
+	QNODE *a_msg = calloc(1, sizeof(QNODE));
 	if (!a_msg) {
 		perror("queue_enqueue, malloc:");
 		return;
 	}
 	a_msg->data = data;
 	a_msg->next = NULL;
-	pthread_mutex_lock(q->mutex);
+	pthread_mutex_lock(&q->mutex);
 	if (q->items == 0) { 			// special case - queue is empty 
 		q->head = a_msg;
 		q->tail = a_msg;
@@ -68,16 +63,16 @@ void queue_add(QUEUE *q, void *data) {
 		q->tail = a_msg;
 	}
 	q->items++;
-	pthread_cond_signal(q->cond);
-	pthread_mutex_unlock(q->mutex);
+	pthread_cond_signal(&q->cond);
+	pthread_mutex_unlock(&q->mutex);
 }
 
 void *queue_get(QUEUE *q) {
 	if (!q)
 		return NULL;
-	pthread_mutex_lock(q->mutex);
+	pthread_mutex_lock(&q->mutex);
 	while (q->items==0) {
-		pthread_cond_wait(q->cond, q->mutex);
+		pthread_cond_wait(&q->cond, &q->mutex);
 		if (q->items == 0)
 			return NULL;
 	}
@@ -89,8 +84,8 @@ void *queue_get(QUEUE *q) {
 	    q->tail = NULL;
 	}
 	q->items--;
-	pthread_cond_signal(q->cond);
-	pthread_mutex_unlock(q->mutex);
+	pthread_cond_signal(&q->cond);
+	pthread_mutex_unlock(&q->mutex);
 	void *data = a_msg->data;
 	FREE(a_msg);
     return data;
@@ -104,7 +99,7 @@ void *queue_get_nowait(QUEUE* q) {
 
 void queue_wakeup(QUEUE *q) {
 	if (q) {
-		pthread_cond_signal(q->cond);
+		pthread_cond_signal(&q->cond);
 	}
 }
 
