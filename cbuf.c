@@ -17,11 +17,11 @@
 #include "cbuf.h"
 
 static void cbuf_lock(CBUF *b) {
-	pthread_mutex_lock(b->lock);
+	pthread_mutex_lock(&b->lock);
 }
 
 static void cbuf_unlock(CBUF *b) {
-	pthread_mutex_unlock(b->lock);
+	pthread_mutex_unlock(&b->lock);
 }
 
 /* Returns how much data is filled in the buffer */
@@ -54,25 +54,24 @@ void cbuf_dump(CBUF *b) {
 }
 
 CBUF *cbuf_init(int buffer_size, char *name) {
+	if (!buffer_size)
+		return 0;
 	CBUF *b = calloc(1, sizeof(CBUF));
 	if (!b)
 		return NULL;
-	if (!buffer_size)
-		return 0;
-	pthread_mutex_t *mutex = malloc(sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(mutex, NULL) != 0) {
+	if (pthread_mutex_init(&b->lock, NULL) != 0) {
 		perror("cbuf_new: mutex_init");
+		free(b);
 		return NULL;
 	}
-	b->lock     = mutex;
 	b->name     = strdup(name);
 	b->size     = buffer_size;
 	b->pos      = 0;
 	b->writepos = 0;
 	b->buffer   = calloc(1, buffer_size);
 	if (!b->buffer) {
-		free(b);
 		LOGf("CBUF  [%10s]: Can't allocate buffer size: %d\n", name, buffer_size);
+		free(b);
 		return NULL;
 	}
 	return b;
@@ -82,8 +81,7 @@ void cbuf_free(CBUF **pb) {
 	CBUF *b = *pb;
 	if (!b)
 		return;
-	pthread_mutex_destroy(b->lock);
-	FREE(b->lock);
+	pthread_mutex_destroy(&b->lock);
 	FREE(b->buffer);
 	FREE(b->name);
 	FREE(*pb);

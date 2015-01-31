@@ -12,7 +12,7 @@
 
 // Circular buffer
 typedef struct {
-	pthread_mutex_t *lock;
+	pthread_mutex_t lock;
 	char *name;
 	int size;			/* Buffer size, must be (bufsize % 1316) == 0 */
 	int pos;			/* Up to where the buffer is filled */
