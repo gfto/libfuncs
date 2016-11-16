@@ -32,9 +32,9 @@ void daemonize(char *pidfile) {
 	}
 	// Child process continues...
 	setsid();	// request a new session (job control)
-	freopen("/dev/null", "r", stdin);
-	freopen("/dev/null", "w", stdout);
-	freopen("/dev/null", "w", stderr);
+	if (!freopen("/dev/null", "r", stdin)) return;
+	if (!freopen("/dev/null", "w", stdout)) return;
+	if (!freopen("/dev/null", "w", stderr)) return;
 }
 
 void init_server_socket(char *bind_addr, int bind_port, struct sockaddr_in *server, int *server_socket) {
